@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}add your comment{% endblock title %}
+
+
+{% block body %}
+
+<!--   Add Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Record Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="">
+                    {% csrf_token %}
+                  
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">description</label>
+                        <input type="text" class="form-control" name="desc" id="exampleInputPassword1">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<h1 class="text-center text-primary">{{pending.title}}</h1>
+
+<!-- Button trigger modal -->
+<div class="d-flex justify-content-center ">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add new Record
+    </button>
+</div>
+
+<hr>
+<div class="container">
+
+    <table class=" table table-hover table-primary">
+        <thead>
+            <tr>
+                <th scope="col">SNo</th>
+                <th scope="col">Issue {{pending.title}}</th>
+                <th scope="col">updated time</th>
+            </tr>
+        </thead>
+        {% for mep in work %}
+        <tbody>
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{ mep.desc }}</td>
+                <td>{{ mep.date_updated }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock body %}

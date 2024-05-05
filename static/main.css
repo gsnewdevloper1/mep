@@ -1,0 +1,43 @@
+body {
+    background-color:rgba(0,0,0, .4);
+  }
+
+#y{
+    padding: 3%;
+    height:100%;
+    width: 100%;    
+    
+}
+
+#l{
+    height:450px;
+    width: 24%;
+    background:rgba(255,255,255, .6);     
+    margin: auto;
+    border-radius: 7px ;
+    
+}
+#l:hover{
+    background:linear-gradient(45deg,rgba(50,177,40, .6),rgba(255,255,255, .6));
+}
+
+
+#r:hover{
+    background:linear-gradient(45deg,rgba(50,177,40, .6),rgba(255,255,255, .6));
+}
+#student{
+    margin:50px 50px;
+    color:blue;
+    
+}
+
+.t{
+    height: 40px;
+    width: 100%;
+    border: 2px solid green;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    
+}
+

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}login{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/main.css">
+{% endblock head %}
+
+{% block body %}
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    <div id="y">
+        <div id="l">
+            <h1 style=" text-align: center; color: #2c7ad6;">MEP IT Engineers</h1>
+            {% if messages %}
+            <div class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                {{message}}
+                {% endfor %}
+    
+            </div>
+            {% endif %}
+            <div id="student">
+                User Name <br><input type="text" name="user" class="t" /><br>
+                Password <br><input type="password" name="pass" class="t" /><br>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success">Login</button>
+                </div>
+                <br>
+                <br>
+                <p>If you don't have Login cridential</p>
+            </div>
+        </div>
+    </div>
+
+
+
+</form>
+
+{% endblock body %}

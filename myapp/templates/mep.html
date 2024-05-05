@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Entry Page{% endblock title %}
+
+{% block body %}
+
+
+
+
+
+<!--   Add Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Record Details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/add">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">description</label>
+            <input type="text" class="form-control" name="desc" id="exampleInputPassword1">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<h1 class="text-center text-primary">Pending work</h1>
+
+
+{% if user.is_authenticated %}
+<!-- Button trigger modal -->
+<div class="d-flex justify-content-center ">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add new Record
+  </button>
+</div>
+{% else %}
+<h3 class="text-center text-danger">you need to login first to add data</h3>
+{% endif %}
+
+
+<hr>
+<div class="container">
+
+
+  <table class=" table table-hover table-success">
+    <thead>
+      <tr>
+        <th scope="col">SNo</th>
+        <th scope="col">Title</th>
+        <th scope="col">Issue</th>
+        <th scope="col">date Date created</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    {% for mep in work %}
+    <tbody>
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{ mep.title }} </td>
+        <td>{{ mep.desc }}</td>
+        <td>{{ mep.date_created }}</td>
+        <td>{% if user.is_authenticated %}
+
+          <a href="{% url 'comment' mep.sno %}" class="btn btn-outline-dark btn-sm mx-1">Details</a>
+
+          <form action="{% url 'deletedata' mep.sno %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-outline-danger btn-sm mx-1" value="delete">
+          </form>
+          {% else %}
+          <p>you need to login!</p>
+          {% endif %}
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
+{% endblock body %}
